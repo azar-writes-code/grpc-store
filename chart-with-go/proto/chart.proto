@@ -1,0 +1,19 @@
+syntax = "proto3";
+package charts;
+option go_package = "./charts";
+
+service ChartDataService {
+    rpc GetLineChartData(ChartRequest) returns (stream ChartResponse) {}
+    rpc GetBarChartData(ChartRequest) returns (stream ChartResponse) {}
+  }
+  
+  message ChartRequest {
+    
+  }
+  
+  message ChartResponse {
+    int64 x = 1;
+    int64 y = 2;
+  }
+
+  
