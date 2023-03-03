@@ -1,0 +1,25 @@
+syntax = "proto3";
+package charts;
+option go_package = "./charts";
+
+service ChartDataService {
+    rpc GetLineChartData(LineChartRequest) returns (stream LineChartResponse) {}
+    rpc GetProgressChartData(ProgressChartRequest) returns (stream ProgressChartResponse) {}
+  }
+  
+  message LineChartRequest {
+    string title = 1;
+  }
+  
+  message LineChartResponse {
+    int64 x = 1;
+    int64 y = 2;
+  }
+
+  message ProgressChartRequest{
+
+  }
+  message ProgressChartResponse{
+    string title = 1;
+    int64   value = 2;
+  }

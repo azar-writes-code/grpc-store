@@ -1,0 +1,29 @@
+ChartDataService proto file explanation
+This proto file defines a service called ChartDataService that has two rpc methods: GetLineChartData and GetBarChartData. Both of these methods take in a ChartRequest message as input and return a stream of ChartResponse messages as output.
+
+package charts
+The package name is charts.
+
+option go_package
+The go_package option is set to ./charts, which specifies the Go package name for the generated code.
+
+service ChartDataService
+This service defines the two rpc methods GetLineChartData and GetBarChartData.
+
+rpc GetLineChartData(ChartRequest) returns (stream ChartResponse)
+This method takes in a ChartRequest message as input and returns a stream of ChartResponse messages as output.
+
+rpc GetBarChartData(ChartRequest) returns (stream ChartResponse)
+This method also takes in a ChartRequest message as input and returns a stream of ChartResponse messages as output.
+
+message ChartRequest
+This message type is used as the input for both GetLineChartData and GetBarChartData methods. It does not have any fields defined in this proto file.
+
+message ChartResponse
+This message type is used as the output for both GetLineChartData and GetBarChartData methods. It has two fields defined:
+
+int64 x = 1;
+int64 y = 2;
+The field x is assigned the tag number 1 and y is assigned the tag number 2. These tag numbers are used to identify fields when the message is encoded or decoded.
+
+This proto file is used to define the service and message types for chart data. The generated code can be used to implement the service and handle the message types in a language supported by protobuf.

@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+option go_package = "./;pb";
+
+// User Request and Response
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message SignUpRequest {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message SignUpResponse { User user = 1; }
+
+// Ping
+message PingRequest {}
+message PongResponse { string name = 1; }
+
+// Update User
+message UpdateUserRequest {
+  string email = 1;
+  string name = 2;
+  google.protobuf.Timestamp updated_at = 3;
+}
+message UpdateUserResponse { User user = 1; }
+
+service AuthService {
+  rpc SignUp(SignUpRequest) returns (SignUpResponse) {};
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {};
+  rpc Ping(PingRequest) returns (PongResponse) {};
+}

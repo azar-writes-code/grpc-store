@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+package pb;
+
+option go_package = "./;pb";
+
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  enum role {
+    user = 0;
+    admin = 1;
+  }
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+service AuthService {
+  rpc SignUpUser(SignUpUserInput) returns (GenericResponse) {}
+  rpc SignInUser(SignInUserInput) returns (SignInUserResponse) {}
+  rpc VerifyEmail(VerifyEmailRequest) returns (GenericResponse) {}
+  rpc GetMe(GetMeRequest) returns (UserResponse) {}
+}
+
+message UserResponse { User user = 1; }
+
+message GenericResponse {
+  string status = 1;
+  string message = 2;
+}
+
+message SignInUserInput {
+  string email = 1;
+  string password = 2;
+}
+
+message SignInUserResponse {
+  string status = 1;
+  string access_token = 2;
+  string refresh_token = 3;
+}
+
+message SignUpUserInput {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+  string passwordConfirm = 4;
+}
+
+message SignUpUserResponse { User user = 1; }
+
+message VerifyEmailRequest { string verificationCode = 1; }
+
+message GetMeRequest { string Id = 1; }
